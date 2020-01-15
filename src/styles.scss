@@ -1,0 +1,16 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+
+.mat-row.hovered {
+  background: rgb(224, 82, 82);
+}
+
+.mat-row.highlighted {
+  background: rgb(185, 206, 238);
+}
+
+mat-cell.mat-cell,
+mat-header-cell.mat-header-cell {
+  overflow: visible;
+}
+

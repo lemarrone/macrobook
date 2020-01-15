@@ -1,0 +1,115 @@
+<mat-sidenav-container fullscreen>
+
+    <mat-sidenav-content fxLayout="column">
+
+        <!-- ToolBar com Cabeçalho-->
+        <mat-toolbar>
+            <div fxLayout="row">
+                <div fxLayoutAlign="center center">
+                    <img class="imagemLogo" src="assets/images/brklogo.png">
+                    <span style="font-family: Verdana, Geneva, Tahoma, sans-serif;">Macros Corporativas -
+                        BOOK</span>
+                </div>
+            </div>
+        </mat-toolbar>
+
+        <!-- Container Central -->
+        <!-- Loading -->
+        <div class="example-loading-shade" *ngIf="isLoadingResults">
+                <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+        </div>
+        
+        <div fxLayout="column" style="height:100vh;">
+
+            <!-- Divisão interna para separar em 2 partes-->
+            <div flexLayout="row" fxLayoutAlign="start start" style="height:100%; background-color: white;">
+
+                <!-- Parte 1-->
+                <div fxFlex="40" style="height:100%; background-color: white;">
+
+                    <!-- Filtro -->
+                    <div flexLayout="row" fxLayoutAlign="start center">
+                        <mat-form-field class="filtro" fxFlex="95">
+                            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro">
+                        </mat-form-field>
+                        <mat-icon fxFlex="5">search</mat-icon>
+                    </div>
+                    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="25"></mat-paginator>
+                    <!-- Table -->
+                    <div class="mat-elevation-z0" style="height:75%; overflow: auto;">
+                        <table mat-table [dataSource]="dataSource" matSort>
+                            <ng-container matColumnDef="id">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Código
+                                </th>
+                                <td mat-cell *matCellDef="let row">{{row.id}}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="macro">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                    Macro
+                                </th>
+                                <td mat-cell *matCellDef="let row">{{row.macro}}</td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; let i = index; columns: displayedColumns;"
+                                [ngClass]="{'highlight': selectedRowIndex == row.id}" (click)="highlight(row, i)"
+                                (mouseover)="row.hovered = true" (mouseout)="row.hovered = false">
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- TAB com Ajuda-->
+                <div fxFlex="60" style="margin-left:10px; margin-right:10px; background-color: white;">
+                    <mat-tab-group>
+                        <mat-tab label="Dados Gerais">
+                            <div class="mat-elevation-z0">
+                                <div flexLayout="col">
+                                    <!-- Titulo da Macro -->
+                                    <div style="padding: 25px;" flexLayout="row" fxLayoutAlign="start center">
+                                        <div fxFlex="5">
+                                            <mat-icon fxFlex="5">book</mat-icon>
+                                        </div>                                      
+                                        <div fxFlex="95">
+                                            <span class="mat-h2">{{macroSelecionada.resumo}}</span>
+                                        </div>
+                                    </div>
+                                    <mat-divider></mat-divider>
+                                     <!-- Informacoes Completas -->
+                                    <div style="padding: 25px; max-height: 52vh; overflow: auto;" class="mat-h3"
+                                        [innerHTML]="macroSelecionada.informacoes">
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-tab>
+                        <!-- Preview : Não Implementado -->
+                        <mat-tab label="Preview">
+                            <div class="pdf-container" style="height: 80vh;">
+                                <pdf-viewer [src]="src" [original-size]="false"></pdf-viewer>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Rodapé -->
+        <footer fxFlexOffset="auto" style="min-height: 50px;">
+
+            <div flexLayout="row" fxLayoutAlign="space-around center"
+                style="padding:10px; font-family: Verdana, Geneva, Tahoma, sans-serif;">
+                <mat-chip-list *ngIf="macroSelecionada.macroCategoria!=''" aria-label="">
+                    <mat-chip color="primary" selected>Tipo: {{macroSelecionada.macroTipo}}</mat-chip>
+                    <mat-chip style="margin-left: 20px;" color="accent" selected>Categoria: {{macroSelecionada.macroCategoria}}</mat-chip>
+                </mat-chip-list>
+                <div *ngIf="macroSelecionada.logarExecucao!=''" style="vertical-align: middle;">
+                    <span>Loga Execução ? </span>
+                    <span>{{macroSelecionada.logarExecucao}}</span>
+                </div>
+            </div>
+
+        </footer>
+
+    </mat-sidenav-content>
+
+</mat-sidenav-container>

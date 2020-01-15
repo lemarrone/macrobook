@@ -1,0 +1,79 @@
+.imagemLogo {
+  width: 100px;
+  padding: 20px;
+}
+
+.textoLogo {
+  text-align: center;
+}
+
+.filtro {
+  width: 95%;
+  padding: 10px !important;
+}
+
+.inputFiltro {
+  margin-right: 5px;
+}
+
+
+//Loading
+.example-loading-shade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0px;
+  right: 0;
+  background: rgba(0, 0, 0, 0.15);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+//Table
+
+table {
+  width: 100%;
+  padding: 10px;
+}
+
+.mat-column-id {
+  width: 20px !important;
+}
+
+.mat-column-macro {
+  width: 80% !important;
+}
+
+.highlight {
+  background: #a8e1fc; /* green */
+}
+
+.mat-row:hover {
+  background-color: rgb(215, 244, 253);
+}
+
+//SCROOL BAR
+
+/* width */
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px rgb(255, 254, 254); 
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(104, 104, 107); 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #d8d7d7; 
+}
