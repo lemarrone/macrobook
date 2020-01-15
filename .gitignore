@@ -39,6 +39,7 @@
 /*.txt
 /*.msi
 /*.wixpdb
+/dist
 
 # === Rules for artifacts of `./configure` ===
 /icu_config.gypi
